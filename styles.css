@@ -1,0 +1,536 @@
+* {
+    box-sizing: border-box;
+  }
+  :root {
+    --ink: #151515;
+    --muted: #686868;
+    --paper: #fafafa;
+    --purple: #7065ee;
+  }
+  html {
+    min-width: 320px;
+    background: var(--paper);
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 5px 2% 20px;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "Epilogue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font: inherit;
+  }
+  .page-shell {
+    position: relative;
+    min-height: calc(100vh - 25px);
+  }
+  .site-header {
+    min-height: 67px;
+    border-top: 1px solid #6f6f6f;
+    display: flex;
+    align-items: center;
+    gap: 44px;
+    padding: 0 3.1% 0 2.1%;
+    position: relative;
+  }
+  .logo {
+    font-size: 29px;
+    line-height: 1;
+    letter-spacing: -1.7px;
+    font-weight: 800;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    flex: 1;
+  }
+  .nav-item {
+    position: relative;
+  }
+  .nav-link,
+  .registration button {
+    color: #515151;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .nav-link:hover,
+  .registration button:hover {
+    color: var(--ink);
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 0 3px 9px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.18s ease;
+  }
+  .nav-item.dropdown-open .chevron {
+    transform: rotate(225deg) translate(-1px, -1px);
+  }
+  .dropdown-list {
+    display: none;
+    position: absolute;
+    z-index: 25;
+    top: calc(100% + 7px);
+    left: -20px;
+    min-width: 155px;
+    padding: 14px 17px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 35px #0002;
+  }
+  .nav-item.dropdown-open > .dropdown-list {
+    display: grid;
+    gap: 14px;
+  }
+  .dropdown-link a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .dropdown-link a:hover {
+    color: var(--ink);
+  }
+  .mini-icon {
+    width: 15px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .purple {
+    color: #7164e8;
+  }
+  .blue {
+    color: #4ba9d8;
+  }
+  .yellow {
+    color: #e5c941;
+  }
+  .green {
+    color: #5cae91;
+  }
+  .registration {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+  }
+  .registration button {
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+  }
+  .registration .register-button {
+    border: 1px solid #888;
+    border-radius: 15px;
+    padding: 11px 22px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .registration .register-button:hover {
+    color: #fff;
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .open-menu,
+  .close-menu,
+  .overlay{
+    display: none;
+  }
+  .hero {
+    width: min(100%, 1260px);
+    min-height: min(620px, calc(100vh - 120px));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(36px, 7vw, 100px);
+    padding: 45px 4.8% 25px;
+  }
+  .hero-copy {
+    padding-top: 17px;
+  }
+  .hero-copy h1 {
+    max-width: 520px;
+    margin: 0 0 34px;
+    font-size: clamp(48px, 4.2vw, 66px);
+    line-height: 1.03;
+    letter-spacing: -2.3px;
+    font-weight: 800;
+  }
+  .hero-copy p {
+    max-width: 440px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .primary-button {
+    display: inline-flex;
+    min-height: 45px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 33px;
+    padding: 0 26px;
+    color: #fff;
+    background: #111;
+    border: 1px solid #111;
+    border-radius: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+  }
+  .primary-button:hover {
+    color: #111;
+    background: transparent;
+  }
+  .client-logos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 440px;
+    margin-top: 76px;
+    color: #a9a9a9;
+    font-weight: 800;
+    line-height: 0.82;
+  }
+  .client-logos span {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: -0.7px;
+    white-space: nowrap;
+  }
+  .client-logos i {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 2px;
+    border-radius: 50%;
+    background: #b2b2b2;
+  }
+  .client-logos .audiophile {
+    display: inline-block;
+    font-size: 17px;
+    letter-spacing: -1px;
+    text-align: center;
+  }
+  .client-logos .meet i {
+    width: 8px;
+    height: 8px;
+    box-shadow: -5px 4px 0 -1px #b2b2b2;
+  }
+  .client-logos .maker {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  .client-logos .maker b {
+    margin-right: 6px;
+    font-size: 20px;
+  }
+  .hero-art {
+    width: 100%;
+    max-width: 390px;
+    justify-self: center;
+  }
+  .artwork {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .site-footer {
+    padding: 5px 0 0;
+    text-align: center;
+    color: #686868;
+    font-size: 10px;
+  }
+  .site-footer a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  @media (max-width: 900px) {
+    .site-header {
+      gap: 28px;
+      padding-right: 2%;
+      padding-left: 1.5%;
+    }
+    .nav-links {
+      gap: 22px;
+    }
+    .registration {
+      gap: 20px;
+    }
+    .hero {
+      gap: 34px;
+      padding-right: 3%;
+      padding-left: 3%;
+    }
+    .hero-copy h1 {
+      font-size: clamp(43px, 5.2vw, 56px);
+    }
+    .client-logos {
+      gap: 13px;
+      margin-top: 58px;
+    }
+    .client-logos span {
+      font-size: 13px;
+    }
+  }
+  @media (max-width: 650px) {
+    body {
+      padding: 0 0 20px;
+    }
+    .page-shell {
+      min-height: 100vh;
+    }
+    .site-header {
+      min-height: 70px;
+      border-top: 0;
+      padding: 0 22px;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 30px;
+    }
+    .open-menu {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: 3px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+    .open-menu span {
+      width: 25px;
+      height: 2px;
+      background: #151515;
+    }
+    nav {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(62vw, 360px);
+      min-width: 245px;
+      height: 100dvh;
+      padding: 85px 28px 28px 32px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      background: #fff;
+      transform: translateX(105%);
+      visibility: hidden;
+      opacity: 0;
+      transition: transform 0.28s ease, opacity 0.25s ease, visibility 0.28s;
+      overflow-y: auto;
+    }
+    nav.is-open {
+      transform: translateX(0);
+      visibility: visible;
+      opacity: 1;
+    }
+    .close-menu {
+      display: block;
+      position: absolute;
+      top: 25px;
+      right: 23px;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+    .close-menu span {
+      position: absolute;
+      top: 15px;
+      left: 1px;
+      width: 29px;
+      height: 2px;
+      background: #151515;
+    }
+    .close-menu span:first-child {
+      transform: rotate(45deg);
+    }
+    .close-menu span:last-child {
+      transform: rotate(-45deg);
+    }
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+    .nav-item {
+      width: 100%;
+    }
+    .nav-link {
+      font-size: 16px;
+      padding: 9px 0;
+    }
+    .nav-anchor {
+      display: block;
+    }
+    .chevron {
+      width: 7px;
+      height: 7px;
+      margin-left: 12px;
+    }
+    .dropdown-list {
+      position: static;
+      min-width: 0;
+      margin: 3px 0 5px 8px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      box-shadow: none;
+      background: #fafafa;
+    }
+    .nav-item.dropdown-open > .dropdown-list {
+      gap: 12px;
+    }
+    .dropdown-link a {
+      font-size: 14px;
+    }
+    .registration {
+      display: none;
+      margin-top: 28px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+    }
+    .registration button {
+      font-size: 15px;
+      padding: 8px 10px;
+    }
+    .registration .register-button {
+      border-radius: 14px;
+      padding: 11px 18px;
+    }
+        .overlay {
+          opacity:1;
+          position: fixed;
+          inset: 0;
+          z-index: 40;
+          width: calc(100vw - 62vw);
+          height: 100%;
+          padding: 0;
+          border: 0;
+          background: #0000003d;
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+      
+        .overlay.is-visible {
+          display: block;
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+      
+        nav {
+          z-index: 50;
+        }
+      
+    body.menu-open {
+      overflow: hidden;
+    }
+    .hero {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 28px;
+      min-height: 0;
+      padding: 18px 0 0;
+    }
+    .hero-art {
+      width: min(76%, 330px);
+      max-width: 330px;
+    }
+    .hero-copy {
+      width: 100%;
+      padding: 0 22px;
+      text-align: center;
+    }
+    .hero-copy h1 {
+      margin: 0 0 20px;
+      font-size: clamp(35px, 10vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+    }
+    .desktop-break {
+      display: none;
+    }
+    .hero-copy p {
+      max-width: 440px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .primary-button {
+      margin-top: 24px;
+      min-height: 48px;
+      border-radius: 14px;
+      padding: 0 24px;
+    }
+    .client-logos {
+      max-width: 420px;
+      margin: 47px auto 0;
+      gap: 16px;
+    }
+    .client-logos img {
+      width: 100%;
+    }
+    .client-logos .audiophile {
+      font-size: clamp(11px, 3.2vw, 15px);
+    }
+    .client-logos .maker {
+      font-size: 11px;
+    }
+    .site-footer {
+      margin-top: 52px;
+      padding: 0 10px;
+      font-size: 10px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+    }
+  }
+  

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Snap — make remote work work.">
+  <title>Snap — Make remote work work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <header class="site-header">
+    <a class="header_logo" href="#" aria-label="Snap home"><img alt="snap's logo" class="logo" src="./assets/images/logo.svg"/></a>
+
+    <button class="open-menu" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav aria-label="Main navigation">
+      <button class="close-menu" type="button" aria-label="Close menu"><span></span><span></span></button>
+      <div class="nav-links">
+      <div class="nav-item">
+      <button class="nav-link" type="button" aria-expanded="false" aria-controls="features-dropdown">Features <span class="chevron"></span></button>
+      <div class="dropdown-list" id="features-dropdown">
+      <div class="dropdown-link"><a href="#" aria-label="todo-list"><span class="mini-icon purple"><img src="./assets/images/icon-todo.svg"/></span>Todo List</a></div>
+      <div class="dropdown-link"><a href="#"><img src="./assets/images/icon-calendar.svg"/>Calendar</a></div>
+      <div class="dropdown-link"><a href="#"><img src="./assets/images/icon-reminders.svg"/>Reminders</a></div>
+      <div class="dropdown-link"><a href="#"><img src="./assets/images/icon-planning.svg"/>Planning</a></div>
+      </div></div>
+      <div class="nav-item">
+      <button class="nav-link" type="button" aria-expanded="false" aria-controls="company-dropdown">Company <span class="chevron"></span></button>
+      <div class="dropdown-list" id="company-dropdown">
+      <div class="dropdown-link"><a href="#">History</a></div><div class="dropdown-link"><a href="#">Our Team</a></div><div class="dropdown-link"><a href="#">Blog</a></div>
+      </div></div>
+      <a class="nav-link nav-anchor" href="#">Careers</a><a class="nav-link nav-anchor" href="#">About</a>
+      </div>
+      <div class="registration"><button type="button" class="login-button">Login</button><button type="button" class="register-button">Register</button></div>
+      </nav>
+      <div class="overlay" aria-label="Close navigation menu" aria-hidden="true" tabindex="-1"></div>
+  </header>
+ 
+ 
+  <main class="hero">
+    <section class="hero-copy text-content">
+      <h1>Make remote<br class="desktop-break"> work</h1>
+      <p>Get your team in sync, no matter your location. Streamline processes, create team rituals, and watch productivity soar.</p>
+      <a class="primary-button" href="#">Learn More</a>
+
+      <div class="client-logos clients" aria-label="Our clients">
+        <span class="databiz"><img src="./assets/images/client-databiz.svg"/></span>
+        <span class="audiophile"><img src="./assets/images/client-audiophile.svg"/></span>
+        <span class="meet"><img src="./assets/images/client-meet.svg"/></span>
+        <span class="maker"><img src="./assets/images/client-maker.svg"/></span>
+      </div>
+    </section>
+
+    <main class="hero-art" aria-label="A person working remotely on a laptop">
+      <picture>
+        <source srcset="./assets/images/image-hero-desktop.png" width="100%" class="desktop-hero">
+        <img src="./assets/images/image-hero-mobile.png" width="100%" class="mobile-hero">
+      </picture>
+      
+    </main>
+    
+  </main>
+
+  <footer class="site-footer attribution">
+    Challenge by <a href="https://crio.do" target="_blank" rel="noreferrer">Crio.do</a>.
+    Coded by <a href="#">Neeta Agrawal</a>.
+  </footer>
+
+  <script>
+    const openButton=document.querySelector('.open-menu');
+    const closeButton=document.querySelector('.close-menu');
+    const nav=document.querySelector('nav');
+    const overlay=document.querySelector('.overlay');
+    function setMenuOpen(open){
+     nav.classList.toggle('is-open',open);
+     overlay.classList.toggle('is-visible',open);
+     document.body.classList.toggle('menu-open',open);
+     openButton.setAttribute('aria-expanded',String(open));
+     overlay.setAttribute('aria-hidden',String(!open));
+    }
+    openButton.addEventListener('click',()=>setMenuOpen(true));
+    closeButton.addEventListener('click',()=>setMenuOpen(false));
+    overlay.addEventListener('click',()=>setMenuOpen(false));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenuOpen(false)});
+    document.querySelectorAll('.nav-item > .nav-link').forEach(button=>{
+     button.addEventListener('click',e=>{
+      e.stopPropagation();
+      const item=button.closest('.nav-item'), shouldOpen=!item.classList.contains('dropdown-open');
+      document.querySelectorAll('.nav-item').forEach(other=>{
+       other.classList.remove('dropdown-open');
+       const b=other.querySelector(':scope > .nav-link'); if(b)b.setAttribute('aria-expanded','false');
+      });
+      item.classList.toggle('dropdown-open',shouldOpen);
+      button.setAttribute('aria-expanded',String(shouldOpen));
+      button.classList.toggle('link-open')
+     });
+    });
+    document.addEventListener('click',e=>{
+     if(!e.target.closest('.nav-item')) document.querySelectorAll('.nav-item').forEach(item=>{
+      item.classList.remove('dropdown-open');const b=item.querySelector(':scope > .nav-link');if(b)b.setAttribute('aria-expanded','false');
+     });
+    });
+    window.addEventListener('resize',()=>{if(innerWidth>650)setMenuOpen(false)});
+    </script>
+</body>
+</html>
